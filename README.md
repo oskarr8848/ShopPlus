@@ -21,7 +21,7 @@
   <a href="#install">Install</a> |
   <a href="#merra">Merra</a> |
   <a href="#commands">Commands</a> |
-  <a href="docs/index.html">Landing Page</a>
+  <a href="https://oskarr8848.github.io/ShopPlus/">Landing Page</a>
 </p>
 
 ## What Is ShopPlus?
@@ -103,7 +103,7 @@ Admin and reward commands are documented in [`docs/COMMANDS.md`](docs/COMMANDS.m
 
 ## Status
 
-ShopPlus is currently offered as a **free early-access binary** while the public product page and Merra licensing system are being prepared. Commercial licensing, hosted Merra keys, and support tiers may be added later.
+ShopPlus is currently offered as a **free early-access binary** while the public product page and Merra licensing system are being prepared. This is the official free download point for now. Commercial licensing, hosted Merra keys, and support tiers may be added later.
 
 ## Support
 
