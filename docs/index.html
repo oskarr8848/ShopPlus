@@ -1,0 +1,240 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ShopPlus GUI + Merra</title>
+  <meta name="description" content="Premium Minecraft shop GUI, player marketplace, secure trades, voting rewards, and Merra global currency support.">
+  <style>
+    :root {
+      color-scheme: dark;
+      --bg: #0c111b;
+      --panel: #151d2b;
+      --panel-2: #1d2738;
+      --text: #f8fafc;
+      --muted: #a8b3c4;
+      --line: #2e3b52;
+      --red: #e23b3b;
+      --gold: #f59e0b;
+      --green: #17b26a;
+      --cyan: #38bdf8;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background:
+        linear-gradient(135deg, rgba(226, 59, 59, 0.16), transparent 26%),
+        linear-gradient(215deg, rgba(23, 178, 106, 0.15), transparent 28%),
+        var(--bg);
+      color: var(--text);
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 40px)); margin: 0 auto; }
+    header {
+      min-height: 92vh;
+      display: grid;
+      align-items: center;
+      padding: 28px 0 42px;
+    }
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 18px 0;
+      color: var(--muted);
+      font-weight: 700;
+    }
+    .brand { color: var(--text); letter-spacing: 0; font-size: 18px; }
+    .nav-links { display: flex; gap: 18px; flex-wrap: wrap; justify-content: flex-end; }
+    .nav-links a { text-decoration: none; font-size: 14px; }
+    .hero {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 48px;
+      align-items: center;
+      padding: 68px 0 36px;
+    }
+    h1 {
+      margin: 0;
+      font-size: clamp(46px, 7vw, 92px);
+      line-height: 0.95;
+      letter-spacing: 0;
+    }
+    .lead {
+      margin: 26px 0 0;
+      max-width: 640px;
+      color: #d6deea;
+      font-size: 21px;
+      line-height: 1.55;
+    }
+    .actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 48px;
+      padding: 0 20px;
+      border-radius: 8px;
+      font-weight: 850;
+      text-decoration: none;
+      border: 1px solid transparent;
+    }
+    .btn.primary { background: var(--green); color: #06131c; }
+    .btn.secondary { background: rgba(255,255,255,0.06); border-color: var(--line); color: var(--text); }
+    .showcase {
+      border: 1px solid var(--line);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.025));
+      border-radius: 18px;
+      overflow: hidden;
+      box-shadow: 0 26px 70px rgba(0,0,0,0.32);
+    }
+    .showcase img { display: block; width: 100%; height: auto; }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      margin: 34px 0 0;
+    }
+    .stat { padding: 18px; background: rgba(21, 29, 43, 0.9); }
+    .stat strong { display: block; font-size: 24px; }
+    .stat span { color: var(--muted); font-size: 13px; }
+    section { padding: 78px 0; border-top: 1px solid rgba(255,255,255,0.08); }
+    .section-head { max-width: 720px; margin-bottom: 28px; }
+    h2 { margin: 0 0 12px; font-size: 34px; letter-spacing: 0; }
+    .muted { color: var(--muted); line-height: 1.7; }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+    .card {
+      background: rgba(21, 29, 43, 0.86);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 22px;
+    }
+    .card h3 { margin: 0 0 10px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); line-height: 1.6; }
+    .steps {
+      display: grid;
+      grid-template-columns: 0.8fr 1.2fr;
+      gap: 22px;
+      align-items: start;
+    }
+    code {
+      background: #101827;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      padding: 2px 6px;
+      color: #e2e8f0;
+    }
+    pre {
+      background: #090d15;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 18px;
+      overflow-x: auto;
+      color: #dbeafe;
+    }
+    footer { padding: 44px 0; color: var(--muted); border-top: 1px solid rgba(255,255,255,0.08); }
+    @media (max-width: 860px) {
+      .hero, .steps { grid-template-columns: 1fr; }
+      .grid, .stats { grid-template-columns: 1fr; }
+      header { min-height: auto; }
+      .nav-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="wrap">
+      <nav>
+        <div class="brand">ShopPlus GUI + Merra</div>
+        <div class="nav-links">
+          <a href="#features">Features</a>
+          <a href="#download">Download</a>
+          <a href="#merra">Merra</a>
+          <a href="https://github.com/oskarr8848/ShopPlus">GitHub</a>
+        </div>
+      </nav>
+      <div class="hero">
+        <div>
+          <h1>ShopPlus</h1>
+          <p class="lead">A premium Minecraft shop suite for survival servers: GUI shops, player marketplace, secure trades, vote rewards, live pricing, and Merra global currency support.</p>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/oskarr8848/ShopPlus/releases/latest">Download Free</a>
+            <a class="btn secondary" href="https://github.com/oskarr8848/ShopPlus/blob/main/docs/INSTALL.md">Install Guide</a>
+          </div>
+          <div class="stats">
+            <div class="stat"><strong>2.0</strong><span>Current public build</span></div>
+            <div class="stat"><strong>1.21.1+</strong><span>Paper target</span></div>
+            <div class="stat"><strong>Vault</strong><span>Economy bridge</span></div>
+          </div>
+        </div>
+        <div class="showcase">
+          <img src="assets/shopplus-banner.svg" alt="ShopPlus product banner">
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="features">
+      <div class="wrap">
+        <div class="section-head">
+          <h2>Built For Survival Economies</h2>
+          <p class="muted">ShopPlus keeps the common economy flows in one plugin while staying compatible with the stacks servers already use.</p>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>GUI Shops</h3><p>Server shop categories, player market browsing, sell menus, and worth lists.</p></div>
+          <div class="card"><h3>Player Listings</h3><p>Players can list held items, manage active sales, and buy from others without unsafe trades.</p></div>
+          <div class="card"><h3>Secure Trades</h3><p>Trade request, accept, deny, and confirmation flows designed for busy survival servers.</p></div>
+          <div class="card"><h3>Vote Rewards</h3><p>Reward hooks for money, Merra points, temporary discounts, ranks, and flight-time systems.</p></div>
+          <div class="card"><h3>Merra Currency</h3><p>Global points via Merra API, account linking, and PlaceholderAPI value display.</p></div>
+          <div class="card"><h3>Admin Reports</h3><p>Market reports, price reset tools, and reload commands for live server management.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="download">
+      <div class="wrap steps">
+        <div>
+          <h2>Download</h2>
+          <p class="muted">ShopPlus is currently free as an early-access binary. Source code is not published in this repository.</p>
+        </div>
+        <div>
+          <pre><code>File: ShopPlus-2.0.jar
+SHA256: 117064dae42dc80b275cafe80f0b212e365b0d7b0a5f9a2f90fc7ee3b552ffa6</code></pre>
+          <div class="actions">
+            <a class="btn primary" href="https://github.com/oskarr8848/ShopPlus/releases/download/v2.0/ShopPlus-2.0.jar">Download Jar</a>
+            <a class="btn secondary" href="https://github.com/oskarr8848/ShopPlus/blob/main/checksums/SHA256SUMS.txt">Verify Checksum</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="merra">
+      <div class="wrap steps">
+        <div>
+          <h2>Merra</h2>
+          <p class="muted">Merra support is designed around an API-first model. Public servers never receive direct database credentials.</p>
+        </div>
+        <div>
+          <pre><code>Server plugin -> https://api.merra.network -> Merra API -> Merra database</code></pre>
+          <p class="muted">The public placeholder exposed by ShopPlus is <code>%mcnp_merra_points%</code>.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">ShopPlus GUI + Merra. Closed-source binary distribution. Built for MCNP Network and survival servers.</div>
+  </footer>
+</body>
+</html>
